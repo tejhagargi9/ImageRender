@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Images</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 100vh;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  .container {
+    width: 80%; /* Adjust width as needed */
+    overflow-x: scroll;
+    -ms-scroll-snap-type: x mandatory;
+        scroll-snap-type: x mandatory;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  #userImages {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+  .card {
+    width: 200px;
+    /* border: 1px solid #e64d15; */
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    scroll-snap-align: start;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto; /* Ensures the card size remains fixed */
+    width: 200px; /* Initial width of the card */
+  }
+  .card img {
+    width: 100%;
+    border-radius: 5px;
+    /* border: 2px solid red; */
+    height: 15vw;
+    background-size: cover;
+
+  }
+  .name {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .text {
+    font-size: 14px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+    <h2>Doctor Images</h2>
+<div class="container">
+  <div id="userImages"></div>
+</div>
+
+<script>
+  // Sample JSON data with image URLs
+  var imageData = [
+    { "image": "https://img.freepik.com/free-photo/beautiful-young-female-doctor-looking-camera-office_1301-7807.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/premium-photo/medical-concept-asian-beautiful-female-doctor-white-coat-with-stethoscope-waist-up-medical-student-woman-hospital-worker-looking-camera-smiling-studio-blue-background_185696-624.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-confident-male-doctor_329181-12190.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-confident-male-doctor_329181-12190.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-confident-male-doctor_329181-12190.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-confident-male-doctor_329181-12190.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-mature-therapist-sitting-table-looking-camera_1098-18156.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-professional-medical-worker-posing-picture-with-arms-folded_1098-19293.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-professional-medical-worker-posing-picture-with-arms-folded_1098-19293.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-young-female-doctor-raising-forefinger_1262-18334.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-young-female-doctor-raising-forefinger_1262-18334.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-young-female-doctor-raising-forefinger_1262-18334.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-young-female-doctor-raising-forefinger_1262-18334.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-young-female-doctor-raising-forefinger_1262-18334.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/free-photo/smiling-young-female-doctor-raising-forefinger_1262-18334.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/premium-photo/doctor-lady-friendly-smiling-illustration-ai-generativexa_118124-34790.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    { "image": "https://img.freepik.com/premium-photo/doctor-lady-friendly-smiling-illustration-ai-generativexa_118124-34790.jpg?size=626&ext=jpg&ga=GA1.1.2083353889.1681223428&semt=sph" },
+    // Add more image URLs here...
+  ];
+
+  // Function to create a card for each image
+  function createCard(imageData) {
+    var card = document.createElement('div');
+    card.classList.add('card');
+
+    var img = document.createElement('img');
+    img.src = imageData.image;
+    card.appendChild(img);
+
+    var name = document.createElement('div');
+    name.classList.add('name');
+    name.textContent = "Random Name";
+    card.appendChild(name);
+
+    var text = document.createElement('div');
+    text.classList.add('text');
+    text.textContent = "Lorem absii chbbc sbdub";
+    card.appendChild(text);
+
+    return card;
+  }
+
+  // Function to render the cards on the page
+  function renderCards() {
+    var container = document.getElementById('userImages');
+    imageData.forEach(function(item) {
+      var card = createCard(item);
+      container.appendChild(card);
+    });
+  }
+
+  // Call the render function when the page loads
+  window.onload = renderCards;
+</script>
+</body>
+</html>
